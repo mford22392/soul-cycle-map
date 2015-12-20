@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+  has_many :spin_classes
+  
   def self.from_omniauth(auth)
     where(auth.slice(:provider, :uid).permit!).first_or_initialize.tap do |user|
       user.provider = auth.provider
