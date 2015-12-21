@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20151220220827) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "spin_classes", force: :cascade do |t|
     t.integer  "studio_id"
     t.datetime "time"
@@ -22,7 +25,9 @@ ActiveRecord::Schema.define(version: 20151220220827) do
   end
 
   create_table "studios", force: :cascade do |t|
-    t.string   "address"
+    t.decimal  "latitude"
+    t.decimal  "longitude"
+    t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

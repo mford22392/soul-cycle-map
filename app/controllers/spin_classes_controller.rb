@@ -1,0 +1,2 @@
+class SpinClassesController < ApplicationController
+end
