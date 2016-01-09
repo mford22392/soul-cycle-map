@@ -1,0 +1,9 @@
+<div class="row">
+  <div class="col-md-4">
+    <ul>
+      <% @studios.each do |studio| %>
+      <li><%= link_to studio.name, studio %></li>
+      <% end %>
+    </ul>
+  </div>
+</div>

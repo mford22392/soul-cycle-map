@@ -1,7 +1,9 @@
-<p>Welcome!</p>
-<h1>Map of Studios</h1>
-<div id="map-container">
-  <div id="map-canvas" style='width: 800px; height: 400px;'></div>
+<div class="col-md-1"></div>
+<div class="jumbotron col-md-10">
+  <h1>Welcome to SoulFriends</h1>
+  <p>No more frantic texts. No more group chats. We keep track of who's spinning when so you can focus on your ride.</p>
+  <% if !current_user %>
+    <p><%= link_to "Sign Up Today", "/auth/facebook", id: "sign_in", class: "btn btn-primary btn-lg" %></p>
+  <% end %>
 </div>
-
-
+<div class="col-md-1"></div>
