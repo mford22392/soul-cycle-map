@@ -1,9 +1,47 @@
 <div class="row">
   <div class="col-md-4"></div>
   <div class="col-md-4">
-    <h1> <%= @studio.name %> </h1>
+    <h1 style="text-align:center;"> <%= @studio.name %> </h1>
   </div>
   <div class="col-md-4"></div>
 </div>
+<div class="row">
+  <div class="col-md-1"></div>
+  <div class="col-md-11">
+    <div class="open-classes-container">
+      <h2> Open Classes: </h2>
+        <ul>
+          <% @studio.get_classes.each do |spin_class| %>
+          <li> 
+            <strong> <%= spin_class.time %> </strong> | <%= spin_class.instructor.name %> 
+            <%= render partial: AttendClassToggle.new(spin_class, current_user).already_attending?, locals: {spin_class: spin_class} %>
+          </li>
+          <% end %>
+        </ul>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+  $(document).on("page:change", function(){
+  attendListener();
+  unattendListener();
+});
+
+function attendListener(){
+  $(".open-classes-container").on("ajax:success", ".attend", function(event, data){
+    debugger;
+    $(this).parent().html(data.unattend_button);
+  });
+}
+
+function unattendListener(){
+  $(".open-classes-container").on("ajax:success", ".unattend", function(event, data){
+    $(this).parent().html(data.attend_button);
+  });
+}
+
+}
+</script>
 
 <!-- Note: class of 'session open' for listing classes -->

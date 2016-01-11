@@ -1,0 +1,1 @@
+<%= button_to("Not going anymore", attendee_path(Attendee.where(user_id: current_user.id, spin_class_id: spin_class.id).first), method: :delete, remote: true, class: "btn btn-primary btn-xs unattend") %>
