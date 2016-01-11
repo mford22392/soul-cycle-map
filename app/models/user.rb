@@ -18,4 +18,11 @@ class User < ActiveRecord::Base
       user.save!
     end
   end
+
+  def spin_classes_by_date
+    spin_classes = self.spin_classes
+    spin_classes.sort_by do |spin_class|
+      Date.parse(spin_class.month_and_day)
+    end
+  end
 end

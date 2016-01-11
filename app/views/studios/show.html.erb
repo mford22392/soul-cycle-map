@@ -11,10 +11,16 @@
     <div class="open-classes-container">
       <h2> Open Classes: </h2>
         <ul>
-          <% @studio.get_classes.each do |spin_class| %>
-          <li> 
-            <strong> <%= spin_class.time %> </strong> | <%= spin_class.instructor.name %> 
-            <%= render partial: AttendClassToggle.new(spin_class, current_user).already_attending?, locals: {spin_class: spin_class} %>
+          <% @studio.get_classes.each do |day, spin_classes_array| %>
+          <li> <%= day %>
+            <ul>
+              <% spin_classes_array.each do |spin_class| %>
+                <li> 
+                  <strong> <%= spin_class.time %> </strong> | <%= spin_class.instructor.name %> 
+                  <%= render partial: AttendClassToggle.new(spin_class, current_user).already_attending?, locals: {spin_class: spin_class} %>
+                </li>
+              <% end %>
+            </ul>
           </li>
           <% end %>
         </ul>
@@ -22,26 +28,5 @@
   </div>
 </div>
 
-<script type="text/javascript">
-  $(document).on("page:change", function(){
-  attendListener();
-  unattendListener();
-});
-
-function attendListener(){
-  $(".open-classes-container").on("ajax:success", ".attend", function(event, data){
-    debugger;
-    $(this).parent().html(data.unattend_button);
-  });
-}
-
-function unattendListener(){
-  $(".open-classes-container").on("ajax:success", ".unattend", function(event, data){
-    $(this).parent().html(data.attend_button);
-  });
-}
-
-}
-</script>
 
 <!-- Note: class of 'session open' for listing classes -->

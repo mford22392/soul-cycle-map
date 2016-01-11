@@ -1,6 +1,8 @@
 class StudiosController < ApplicationController
   def index
-    @studios = Studio.all
+    @studios = Studio.all.sort_by do |studio| 
+      studio.name
+    end
   end
 
   def show

@@ -1,0 +1,26 @@
+<div class="row">
+  <div class="panel panel-default">
+  <div class="panel-body">
+    <h2 id="centered-header"> 
+      Attending <strong><%= @spin_class.instructor.name %>'s</strong> class on <strong><%= @spin_class.month_and_day%> @  <%= @spin_class.time %></strong> <i>(<%= link_to @spin_class.studio.name, @spin_class.studio %>)</i>
+    </h2>
+  </div>
+</div>
+</div>
+
+<div class="row">
+  <% @spin_class.attendees.each do |attendee| %>
+    <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+      <a class= "thumbnail" id="studio-index" href="/users/<%=attendee.user.id%>">
+        <%= image_tag attendee.user.image, class: "img-responsive"%>
+        <p class="img-with-text"><%= attendee.user.name %></p>
+      </a>
+    </div>
+  <% end %>
+</div>
+
+  
+
+
+
+

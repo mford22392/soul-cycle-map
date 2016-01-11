@@ -1,27 +1,46 @@
 <div class="row">
   <div class="col-md-4 img-with-text">
     <h1><%= @user.name.upcase %></h1>
-    <%= image_tag(@user.image, size: "140") %>
+    <%= image_tag(@user.image) %>
   </div>
   <div class="col-md-4">
-    <h3>My upcoming classes:</h3>
-    <ul>
+    <div class="user-classes-container">
+      <h3>My upcoming classes:</h3>
       <% if @user.spin_classes.length > 0 %>
-        <% @user.spin_classes.each do |spin_class| %>
-          <li> 
-            <strong> <%= spin_class.time %> </strong> | <%= spin_class.instructor.name %> 
-            <%= render partial: "/studios/#{AttendClassToggle.new(spin_class, current_user).already_attending?}", locals: {spin_class: spin_class} %>
-          </li>
-        <% end %>
+        <ul>
+          <% @user.spin_classes_by_date.each do |spin_class| %>
+            <li> 
+              <strong>  <%= spin_class.month_and_day%> @  <%= spin_class.time %> </strong> | <%= spin_class.instructor.name %> <i>(<%= link_to spin_class.studio.name, spin_class.studio %>)</i>
+              <%= render partial: "/studios/unattend_spin_class", locals: {spin_class: spin_class} %> 
+              <%= link_to "See who else is going!", spin_class_path(spin_class) %>
+            </li>
+          <% end %>
+        </ul>
       <% else %>
-        <li> You have no upcoming classes </li>
+        <p>You have no upcoming classes.</p>
+        <a href="/studios" class="btn btn-default btn-lg btn-block">Add a class now!</a>
       <% end %>
-    </ul>
+    </div>
   </div>
   <div class="col-md-4">
     <h3>My friends' upcoming classes:</h3>
+    <% user_show = UserShow.new(current_user) %>
+    <%= user_show.has_friends? %>
     <ul>
-      <li> Placeholder </li>
+      <% if user_show.friends_classes %>
+        <% user_show.friends_classes.each do |friend, classes| %>
+          <li> friend.name </li>
+          <ul>
+            <% friend.spin_classes_by_date.each do |spin_class| %>
+              <li> 
+                <strong> <%= spin_class.month_and_day%> @  <%= spin_class.time %> </strong> | <%= spin_class.instructor.name %> 
+                <%= render partial: "/studios/#{AttendClassToggle.new(spin_class, current_user).already_attending?}", locals: {spin_class: spin_class} %>
+              </li>
+
+            <% end %>
+          </ul>
+        <% end %>
+      <% end %>
     </ul>
   </div>
 </div>

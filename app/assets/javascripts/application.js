@@ -3,5 +3,6 @@
 //= require turbolinks
 //= require bootstrap.min
 //= require studios/attendHideShow
+//= require hover
 
 

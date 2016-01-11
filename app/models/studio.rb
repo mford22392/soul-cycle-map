@@ -36,7 +36,7 @@ class Studio < ActiveRecord::Base
     end
 
     spin_class_objects = hash.each_with_object([]) do |(time, instructor), array|
-      array << SpinClass.find_or_create_by(studio_id: self.id, time: time, instructor_id: instructor.id)
+      array << SpinClass.find_or_create_by(studio_id: self.id, time: time, instructor_id: instructor.id, month_and_day: "#{month} #{day}")
     end
 
     ["#{month} #{day}", spin_class_objects]
