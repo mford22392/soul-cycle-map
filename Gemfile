@@ -32,6 +32,8 @@ gem 'autoprefixer-rails'
 
 gem 'nokogiri'
 gem 'pry'
+gem "simple_calendar", "~> 2.0"
+gem "watu_table_builder", :require => "table_builder"
 
 
 

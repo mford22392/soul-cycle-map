@@ -1,29 +1,33 @@
 <div class="row">
   <div class="col-md-4 img-with-text">
     <h1><%= @user.name.upcase %></h1>
-    <%= image_tag(@user.image) %>
+    <%= image_tag(@user.image, size: "140") %>
   </div>
   <div class="col-md-4">
     <div class="user-classes-container">
-      <h3>My upcoming classes:</h3>
+      <h3>Upcoming classes:</h3>
       <% if @user.spin_classes.length > 0 %>
         <ul>
           <% @user.spin_classes_by_date.each do |spin_class| %>
             <li> 
               <strong>  <%= spin_class.month_and_day%> @  <%= spin_class.time %> </strong> | <%= spin_class.instructor.name %> <i>(<%= link_to spin_class.studio.name, spin_class.studio %>)</i>
-              <%= render partial: "/studios/unattend_spin_class", locals: {spin_class: spin_class} %> 
-              <%= link_to "See who else is going!", spin_class_path(spin_class) %>
+              <% if @user == current_user %>
+                <%= render partial: "/studios/unattend_spin_class", locals: {spin_class: spin_class} %> 
+                <%= link_to "See who else is going!", spin_class_path(spin_class) %>
+              <% end %>
             </li>
           <% end %>
         </ul>
       <% else %>
-        <p>You have no upcoming classes.</p>
-        <a href="/studios" class="btn btn-default btn-lg btn-block">Add a class now!</a>
+        <p>No upcoming classes.</p>
+        <% if @user == current_user %>
+          <a href="/studios" class="btn btn-default btn-lg btn-block">Add a class now!</a>
+        <% end %>
       <% end %>
     </div>
   </div>
   <div class="col-md-4">
-    <h3>My friends' upcoming classes:</h3>
+    <h3>Friends' upcoming classes:</h3>
     <% user_show = UserShow.new(current_user) %>
     <%= user_show.has_friends? %>
     <ul>

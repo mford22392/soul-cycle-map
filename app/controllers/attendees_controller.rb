@@ -3,7 +3,7 @@ class AttendeesController < ApplicationController
     @attendee = Attendee.find_or_create_by(user_id: current_user.id, spin_class_id: params[:spin_class_id])
     spin_class = SpinClass.find(params[:spin_class_id])
     attend_button = render_to_string(partial: "studios/unattend_spin_class", locals: {spin_class: SpinClass.find(params[:spin_class_id])})
-    render json: {attend_button: attend_button}
+    render json: {attend_button: attend_button, current_user: current_user}
   end
 
   def destroy
@@ -11,7 +11,7 @@ class AttendeesController < ApplicationController
     @spin_class = @attendee.spin_class
     @attendee.destroy
     unattend_button = render_to_string(partial: "studios/attend_spin_class", locals: {spin_class: @spin_class})
-    render json: {unattend_button: unattend_button}
+    render json: {unattend_button: unattend_button, current_user: current_user}
   end
 
   private
