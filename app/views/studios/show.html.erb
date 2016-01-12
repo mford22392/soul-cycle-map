@@ -6,30 +6,23 @@
   <div class="col-md-4"></div>
 </div>
 
-<div class= "row"> 
+<div class="row">
   <div class="col-md-1"></div>
-  <div class="col-md-9">
-    <%= week_calendar number_of_days: 8, events: @studio.spin_classes do |date, spin_classes| %>
-      <%= date.day %>
-
-      <% spin_classes.each do |spin_class| %>
-        <div>
-          
-          <%= render partial: "selected_class", locals: {spin_class: spin_class} %> 
-        </div>
+  <div class="col-md-10">
+    <%= calendar_for(@studio.spin_classes, :html => {:class => 'studio-cal', :id => 'center'}) do |t| %>
+      <%= t.head('Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat') %>
+      <%= t.day(:day_method => :strict_date) do |day, spin_classes| %>
+        <%= day.day %><br>
+        <%= spin_classes.length %> classes
+        
       <% end %>
     <% end %>
   </div>
-  <div class= "col-md-1">
-    <div class="open-classes-container">
-      <h2> Selected Class: </h2>
-        <ul>
-          
-        </ul>
-    </div>
-  </div>
   <div class="col-md-1"></div>
 </div>
+
+
+
 
 
 <div class="row">

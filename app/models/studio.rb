@@ -22,12 +22,7 @@ class Studio < ActiveRecord::Base
   end
 
   def get_a_days_classes(day, noko_hash)
-    if day.to_i >= Time.now.day 
-      month = Date.today.strftime("%B")
-    else
-      next_month = Time.now + 1.month 
-      month = next_month.strftime("%B") 
-    end
+    month = get_month(day)
 
     hash = noko_hash.each_with_object({}) do |class_listing, hash|
       time = class_listing.search('.time').text
@@ -36,12 +31,29 @@ class Studio < ActiveRecord::Base
     end
 
     spin_class_objects = hash.each_with_object([]) do |(time, instructor), array|
-      array << SpinClass.find_or_create_by(studio_id: self.id, time: time, instructor_id: instructor.id, month_and_day: "#{month} #{day}")
+      array << SpinClass.find_or_create_by(studio_id: self.id, time: time, instructor_id: instructor.id, month_and_day: "#{month} #{day}", strict_date: Date.parse("#{month} #{day}"))
     end
 
     ["#{month} #{day}", spin_class_objects]
     #ex:("January 11", [SpinClass1, SpinClass2])
 
+  end
+
+  def get_month(day)
+    date = day.to_i
+    today = Time.now.day
+
+    if (date >= today) && (today >= 8)
+      month = Date.today.strftime("%B")
+    elsif (date >= today) && (today < 8)
+      last_month = Time.now - 1.month 
+      month = last_month.strftime("%B") 
+    elsif (date < today) && (today - date > 8)
+      next_month = Time.now + 1.month 
+      month = next_month.strftime("%B")
+    else
+      month = Date.today.strftime("%B") 
+    end
   end
 
 end

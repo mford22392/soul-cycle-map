@@ -74,28 +74,41 @@
     color: #979797;
 }
 
-.simple-calendar {
-  .day {
-  }
-
-  .wday-0 {}
-  .wday-1 {}
-  .wday-2 {}
-  .wday-3 {}
-  .wday-4 {}
-  .wday-5 {}
-  .wday-6 {}
-
-  .today {
-  }
-  .past {}
-  .future {}
-
-  .start-date {}
-
-  .prev-month {}
-  .next-month { }
-  .current-month {}
-
-  .has-events {}
+#center {
+  width: 50%;
+  margin: 0 auto;
 }
+
+.studio-cal td {
+  background: #FFF;
+  color: #777;
+  height: 80px;
+  width: 100px;
+  vertical-align: top;
+  font-size: 16px;
+  border: 10px;
+ 
+}
+
+.studio-cal .notmonth {
+  color: #CCC;
+}
+
+.studio-cal #month {
+  margin: 0;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  text-align: center;
+}
+
+.studio-cal #month a, .studio-cal #month a:hover {
+  text-decoration: none;
+  padding: 0 10px;
+  color: #999;
+}
+
+.studio-cal .today {
+  background-color: #D7F2FF;
+}
+
+
