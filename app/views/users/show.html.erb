@@ -4,7 +4,11 @@
     <%= image_tag(@user.image, size: "140") %>
   </div>
   <div class="col-md-4">
-    <div class="user-classes-container">
+    <% if @user == current_user %>
+      <div class="current-user-classes-container">
+    <% else %>
+      <div class="user-classes-container">
+    <% end %>
       <h3>Upcoming classes:</h3>
       <% if @user.spin_classes.length > 0 %>
         <ul>
@@ -33,16 +37,20 @@
     <ul>
       <% if user_show.friends_classes %>
         <% user_show.friends_classes.each do |friend, classes| %>
-          <li> friend.name </li>
-          <ul>
-            <% friend.spin_classes_by_date.each do |spin_class| %>
-              <li> 
-                <strong> <%= spin_class.month_and_day%> @  <%= spin_class.time %> </strong> | <%= spin_class.instructor.name %> 
-                <%= render partial: "/studios/#{AttendClassToggle.new(spin_class, current_user).already_attending?}", locals: {spin_class: spin_class} %>
-              </li>
+          <% if friend.spin_classes.length > 0 %> 
+            <li> <%= friend.name %> </li>
+            <ul>
+              <% friend.spin_classes_by_date.each do |spin_class| %>
+                <li> 
+                  <strong> <%= spin_class.month_and_day%> @  <%= spin_class.time %> </strong> | <%= spin_class.instructor.name %> 
+                  <%= render partial: "/studios/#{AttendClassToggle.new(spin_class, current_user).already_attending?}", locals: {spin_class: spin_class} %>
+                </li>
 
-            <% end %>
-          </ul>
+              <% end %>
+            </ul>
+          <% else %>
+          <p> No friends with upcoming classes! </p>
+          <% end %>
         <% end %>
       <% end %>
     </ul>

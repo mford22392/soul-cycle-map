@@ -1,0 +1,47 @@
+<div class="row">
+  <div class="col-md-1"></div>
+  <div class="col-md-6">
+
+
+
+    <h2> My friends: </h2>
+
+    <table class="table table-striped resources-container filterable-table current-friends-table">
+      <% if @friends.length > 0 %>
+        <% @friends.each do |friendship| %>
+          <%= render 'users/user_list', {user: friendship.friend} %>
+        <% end %>
+      <% else %>
+        <br>
+        <p id="no-friends-message">You have no friends yet!</p>
+        <p id="search-message"><i> Use the panel to the right to search for and add friends </i></p>
+      <% end %>
+    </table>
+
+
+   <!--  -->
+
+
+
+  </div>
+  <div class="col-md-4">
+    <div class="form-inline">
+      <div class="form-group">
+        <h2> Search for new friends here: </h2>
+        <label for="filter">Search</label>
+          <input type="text" class="filter form-control" placeholder="Type to filter">
+      </div>
+    </div>
+    <table class="table table-striped resources-container filterable-table search-table">
+      <% if @users.length > 0 %>
+        <% @users.each do |user| %>
+          <%= render 'users/user_list', {user: user} %>
+        <% end %>
+      <% else %>
+        <br>
+        <p id="no-users-message"><i> No users to show.</i></p>
+      <% end %>
+    </table>
+  </div>
+  <div class="col-md-1"></div>
+</div>

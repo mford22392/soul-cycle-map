@@ -25,4 +25,9 @@ class User < ActiveRecord::Base
       Date.parse(spin_class.month_and_day)
     end
   end
+
+  def not_friends
+    friend_ids = self.friends.pluck(:id)
+    User.where.not(id: (friend_ids << self.id))
+  end
 end

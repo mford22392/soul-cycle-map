@@ -66,7 +66,7 @@
 }
 
 .studio-cal td {
-  background: #FFF;
+  /*background: #FFF;*/
   color: #777;
   height: 80px;
   width: 150px;
@@ -79,34 +79,16 @@
   color: #158cba;
 }
 
-.studio-cal tr {
-  border-color: "light-grey";
-}
-
 .studio-cal thead {
   color: #158cba;
 }
 
-.studio-cal .notmonth {
-  background: light-grey;
-}
-
-.studio-cal #month {
-  margin: 0;
-  padding-top: 10px;
-  padding-bottom: 10px;
+.studio-cal th {
   text-align: center;
-
-}
-
-.studio-cal #month a, .studio-cal #month a:hover {
-  text-decoration: none;
-  padding: 0 10px;
-  color: #999;
 }
 
 .studio-cal .today {
-  background-color: #D7F2FF;
+  background-color: #ffffe0;
 }
 
 .selected-day-container {

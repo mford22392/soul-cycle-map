@@ -9,8 +9,8 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-md-8">
-      <%= calendar_for(@studio.spin_classes, :html => {:class => 'studio-cal'}) do |t| %>
-        <%= t.head('Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat') %>
+      <%= calendar_for(@studio.spin_classes, :html => {:class => 'studio-cal table table-striped table-bordered'}) do |t| %>
+        <%= t.head('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday') %>
           <%= t.day(:day_method => :strict_date, :id => 'day') do |day, spin_classes| %>
             <% if (spin_classes.length > 0) || (day.day == Date.today.day) %>
               <p><strong><%= day.day %></strong></p>

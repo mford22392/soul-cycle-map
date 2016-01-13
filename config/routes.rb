@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   resources :studios
   resources :attendees
   resources :spin_classes
+  resources :friendships, only: [:create, :destroy, :index]
 
   root to: "home#show"
 

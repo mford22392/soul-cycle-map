@@ -5,5 +5,7 @@
 //= require studios/attendHideShow
 //= require hover
 //= require studios/selectClass
+//= require searchFilter
+//= require friendshipToggle
 
 

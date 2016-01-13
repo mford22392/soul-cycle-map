@@ -1,5 +1,5 @@
 class AttendeesController < ApplicationController
-   def create
+  def create
     @attendee = Attendee.find_or_create_by(user_id: current_user.id, spin_class_id: params[:spin_class_id])
     spin_class = SpinClass.find(params[:spin_class_id])
     attend_button = render_to_string(partial: "studios/unattend_spin_class", locals: {spin_class: SpinClass.find(params[:spin_class_id])})

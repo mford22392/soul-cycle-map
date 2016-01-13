@@ -1,0 +1,5 @@
+<tr class="user-row-js">
+  <td class="col-md-4"><%= image_tag(user.image, size: "70", class: "img-circle") %></td>
+  <td class="col-md-4"><%= link_to user.name, user %></td>
+  <td class="col-md-2 friendship-js"><%= render partial: AddFriendToggle.new(user, current_user).already_friends?, locals: {potential_friend: user, current_user: current_user} %></td>
+</tr>
