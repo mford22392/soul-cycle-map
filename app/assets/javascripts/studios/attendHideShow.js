@@ -7,13 +7,13 @@ $(document).on("page:change", function(){
 
 
 function attendListener(){
-  $(".open-classes-container").on("ajax:success", ".attend", function(event, data){
+  $(".selected-classes-container").on("ajax:success", ".attend", function(event, data){
     $(this).replaceWith(data.attend_button);
   });
 }
 
 function unattendListener(){
-  $(".open-classes-container").on("ajax:success", ".unattend", function(event, data){
+  $(".selected-classes-container").on("ajax:success", ".unattend", function(event, data){
     $(this).replaceWith(data.unattend_button);
   });
 }

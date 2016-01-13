@@ -1,52 +1,35 @@
-<div class="row">
-  <div class="col-md-4"></div>
-  <div class="col-md-4">
-    <h1 style="text-align:center;"> <%= @studio.name %> </h1>
-  </div>
-  <div class="col-md-4"></div>
-</div>
-
-<div class="row">
-  <div class="col-md-1"></div>
-  <div class="col-md-10">
-    <%= calendar_for(@studio.spin_classes, :html => {:class => 'studio-cal', :id => 'center'}) do |t| %>
-      <%= t.head('Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat') %>
-      <%= t.day(:day_method => :strict_date) do |day, spin_classes| %>
-        <%= day.day %><br>
-        <%= spin_classes.length %> classes
-        
-      <% end %>
-    <% end %>
-  </div>
-  <div class="col-md-1"></div>
-</div>
-
-
-
-
-
-<div class="row">
-  <div class="col-md-1"></div>
-  <div class="col-md-11">
-    <div class="open-classes-container">
-      <h2> Open Classes: </h2>
-        <ul>
-          <% @studio.get_classes.each do |day, spin_classes_array| %>
-          <li> <%= day %>
-            <ul>
-              <% spin_classes_array.each do |spin_class| %>
-                <li> 
-                  <strong> <%= spin_class.time %> </strong> | <%= spin_class.instructor.name %> 
-                  <%= render partial: AttendClassToggle.new(spin_class, current_user).already_attending?, locals: {spin_class: spin_class} %>
-                </li>
-              <% end %>
-            </ul>
-          </li>
-          <% end %>
-        </ul>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-8">
+      <h1 style="text-align:center;"> <%= @studio.name %> </h1>
     </div>
   </div>
 </div>
 
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-8">
+      <%= calendar_for(@studio.spin_classes, :html => {:class => 'studio-cal'}) do |t| %>
+        <%= t.head('Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat') %>
+          <%= t.day(:day_method => :strict_date, :id => 'day') do |day, spin_classes| %>
+            <% if (spin_classes.length > 0) || (day.day == Date.today.day) %>
+              <p><strong><%= day.day %></strong></p>
+              <%= link_to "#{spin_classes.length} classes", select_day_of_classes_path(selected_classes: spin_classes), remote: true, class: "selected-class" %>
+              <!-- <a href="" class="selected-class" data-remote="true"><%= spin_classes.length %> classes</a> -->
+            <% end %>
+          <% end %>
+        <% end %>
+    </div>
 
-<!-- Note: class of 'session open' for listing classes -->
+    <div class="col-md-4">
+      <div class="selected-day-container">
+        <i>Select a day to view the classes...</i>
+      </div>
+        <ul class="selected-classes-container">
+        </ul>
+    </div>
+
+    <div class="col-md-1"></div>
+
+  </div>
+</div>

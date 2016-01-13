@@ -4,5 +4,6 @@
 //= require bootstrap.min
 //= require studios/attendHideShow
 //= require hover
+//= require studios/selectClass
 
 
