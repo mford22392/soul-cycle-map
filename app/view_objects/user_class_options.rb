@@ -5,5 +5,4 @@ class UserClassOptions
     @current_user = current_user
   end
 
-  def
 end
