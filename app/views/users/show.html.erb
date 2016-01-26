@@ -10,38 +10,47 @@
       <div class="user-classes-container">
     <% end %>
       <h3>Upcoming classes:</h3>
-      <% if @user.spin_classes.length > 0 %>
-        <ul>
-          <% @user.spin_classes_by_date.each do |spin_class| %>
-            <li> 
-              <strong>  <%= spin_class.month_and_day%> @  <%= spin_class.time %> </strong> | <%= spin_class.instructor.name %> <i>(<%= link_to spin_class.studio.name, spin_class.studio %>)</i>
-              <% if @user == current_user %>
-                <%= render partial: "/studios/unattend_spin_class", locals: {spin_class: spin_class} %> 
-                <%= link_to "See who else is going!", spin_class_path(spin_class) %>
-              <% end %>
-            </li>
-          <% end %>
-        </ul>
+      <% if @user == current_user %>
+        <ul class="list-of-classes">
       <% else %>
-        <p>No upcoming classes.</p>
-        <% if @user == current_user %>
-          <a href="/studios" class="btn btn-default btn-lg btn-block">Add a class now!</a>
-        <% end %>
+        <ul >
       <% end %>
+        <% if @user.spin_classes.length > 0 %>
+            <% @user.spin_classes_by_date.each do |spin_class| %>
+              <li class=<%=spin_class.id %>> 
+                <strong>  <%= spin_class.month_and_day%> @  <%= spin_class.time %> </strong> | <%= spin_class.instructor.name %><br>
+                
+                  <%= render partial: "/studios/#{AttendClassToggle.new(spin_class, current_user).already_attending?}", locals: {spin_class: spin_class} %>
+                  
+                
+                  <%= render partial: "/spin_classes/other_attendees", locals: {spin_class: spin_class} %> 
+              </li>
+            <% end %>
+        <% else %>
+          <p class="no-classes-message">No upcoming classes.</p>
+          <% if @user == current_user %>
+            <a href="/studios" class="btn btn-default btn-lg btn-block">Add a class now!</a>
+          <% end %>
+        <% end %>
+      </ul>
     </div>
   </div>
-  <div class="col-md-4">
+  <% if @user == current_user %>
+    <div class="col-md-4 friends-classes-container">
+  <% else %>
+    <div class="col-md-4 friends-classes-container-friend-page">
+  <% end %>
     <h3>Friends' upcoming classes:</h3>
-    <% user_show = UserShow.new(current_user) %>
+    <% user_show = UserShow.new(@user) %>
     <%= user_show.has_friends? %>
     <ul>
-      <% if user_show.friends_classes %>
+      <% if user_show.friends_classes.length > 0 %>
         <% user_show.friends_classes.each do |friend, classes| %>
           <% if friend.spin_classes.length > 0 %> 
             <li> <%= friend.name %> </li>
             <ul>
               <% friend.spin_classes_by_date.each do |spin_class| %>
-                <li> 
+                <li class="friend-<%=spin_class.id %>"> 
                   <strong> <%= spin_class.month_and_day%> @  <%= spin_class.time %> </strong> | <%= spin_class.instructor.name %> 
                   <%= render partial: "/studios/#{AttendClassToggle.new(spin_class, current_user).already_attending?}", locals: {spin_class: spin_class} %>
                 </li>

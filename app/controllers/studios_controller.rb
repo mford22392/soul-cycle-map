@@ -8,6 +8,7 @@ class StudiosController < ApplicationController
   def show
     @studio = Studio.find(params[:id])
     @studio.get_classes
+    @studiosClasses = SpinClass.where(strict_date: Date.today .. Date.today + 10.days, studio_id: @studio.id)
   end
 
   def select_day_of_classes

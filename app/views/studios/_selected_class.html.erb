@@ -1,4 +1,5 @@
-<li> 
+<li class=<%=spin_class.id%>> 
   <strong> <%= spin_class.time %> </strong> | <%= spin_class.instructor.name %>
-  <%= render partial: AttendClassToggle.new(spin_class, current_user).already_attending?, locals: {spin_class: spin_class} %>
+  <%= render partial: "studios/#{AttendClassToggle.new(spin_class, current_user).already_attending?}", locals: {spin_class: spin_class} %>
+  <%= link_to "See who else is going!", spin_class_path(spin_class) %>
 </li>

@@ -9,6 +9,7 @@ function addFriendListener(){
     $("#no-friends-message").remove();
     $("#search-message").remove();
     $(this).parent().parent().remove();
+    deleteFriendListener();
   });
 }
 
@@ -17,6 +18,7 @@ function deleteFriendListener(){
     $("#no-users-message").remove();
     $(".search-table").append(data.friend_listing);
     $(this).parent().parent().remove();
+    addFriendListener();
   });
 }
 

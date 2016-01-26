@@ -9,7 +9,7 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-md-8">
-      <%= calendar_for(@studio.spin_classes, :html => {:class => 'studio-cal table table-striped table-bordered'}) do |t| %>
+      <%= calendar_for(@studiosClasses, :html => {:class => 'studio-cal table table-striped table-bordered'}) do |t| %>
         <%= t.head('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday') %>
           <%= t.day(:day_method => :strict_date, :id => 'day') do |day, spin_classes| %>
             <% if (spin_classes.length > 0) || (day.day == Date.today.day) %>
@@ -25,7 +25,7 @@
       <div class="selected-day-container">
         <i>Select a day to view the classes...</i>
       </div>
-        <ul class="selected-classes-container">
+        <ul class="selected-classes-container well" style="overflow-y:scroll; height:400px;">
         </ul>
     </div>
 

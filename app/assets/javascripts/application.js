@@ -2,10 +2,11 @@
 //= require jquery_ujs 
 //= require turbolinks
 //= require bootstrap.min
-//= require studios/attendHideShow
-//= require hover
-//= require studios/selectClass
+//= require spinClasses/attendHideShowFromCurrentUserPage
+//= require spinClasses/attendHideShowFromFriendsPage
+//= require spinClasses/attendHideShowFromStudioPage
+//= require spinClasses/selectClass
+//= require friendships/friendshipToggle
 //= require searchFilter
-//= require friendshipToggle
 
 

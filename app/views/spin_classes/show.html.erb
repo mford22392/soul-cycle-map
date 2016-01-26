@@ -9,14 +9,21 @@
 </div>
 
 <div class="row">
-  <% @spin_class.attendees.each do |attendee| %>
-    <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-      <a class= "thumbnail" id="studio-index" href="/users/<%=attendee.user.id%>">
-        
-        <%= image_tag(attendee.user.image, size: "140") %>
-        <p class="img-with-text"><%= attendee.user.name %></p>
-      </a>
-    </div>
+  <% if @spin_class.attendees.length > 0 %>
+    <% @spin_class.attendees.each do |attendee| %>
+      <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+        <a class= "thumbnail" id="studio-index" href="/users/<%=attendee.user.id%>">
+          
+          <%= image_tag(attendee.user.image, size: "140") %>
+          <p class="img-with-text"><%= attendee.user.name %></p>
+        </a>
+      </div>
+    <% end %>
+
+  <% else %>
+    <h3 id="centered-header"> 
+      <i> No attendees yet! </i>
+    </h3>
   <% end %>
 </div>
 

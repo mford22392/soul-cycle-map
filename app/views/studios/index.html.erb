@@ -9,7 +9,7 @@
 <div class="row">
   <% @studios.each do |studio| %>
     <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-      <a class= "thumbnail" id="studio-index" href="studios/<%=studio.id%>?start_date=<%= Date.today %>">
+      <a class= "thumbnail" id="studio-index" href="studios/<%=studio.id%>">
           <%= image_tag studio.image, class: "img-responsive-custom"%>
       </a>
     </div>
