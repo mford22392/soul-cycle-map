@@ -1,6 +1,6 @@
 $(document).on("page:change", function(){
   resourceFilter();
-})
+});
 
 function resourceFilter(){
   var $rows = $(".filterable-table tr.user-row-js");
