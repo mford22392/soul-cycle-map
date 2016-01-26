@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
   has_many :inverse_friends, through: :inverse_friendships, :source => :user
   
   def self.from_omniauth(auth)
-    where(auth.slice(:provider, :uid).permit!).first_or_initialize.tap do |user|
+    where(auth.slice(:provider, :uid).permit!).first_or_create.tap do |user|
       user.provider = auth.provider
       user.uid = auth.uid
       user.name = auth.info.name
