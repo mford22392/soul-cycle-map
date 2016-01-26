@@ -12,7 +12,7 @@ class UserShow
 
   def friends_classes
     hash = @user.friends.each_with_object({}) do |friend, hash|
-      hash[friend] = friend.spin_classes
+      (hash[friend] = friend.spin_classes) if (friend.spin_classes.length > 0) 
     end
     hash
   end
