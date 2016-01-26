@@ -6,7 +6,7 @@
 
     <h2> My friends: </h2>
 
-    <table class="table table-striped resources-container filterable-table current-friends-table">
+    <table class="table table-striped resources-container current-friends-table">
       <% if @friends.length > 0 %>
         <% @friends.each do |friendship| %>
           <%= render 'users/user_list', {user: friendship.friend} %>
