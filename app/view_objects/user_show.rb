@@ -12,7 +12,12 @@ class UserShow
 
   def friends_classes
     hash = @user.friends.each_with_object({}) do |friend, hash|
-      (hash[friend] = friend.spin_classes) if (friend.spin_classes.length > 0) 
+      
+      spin_classes = friend.spin_classes.select do |spinclass|
+        Date.parse(spinclass.month_and_day) >= Date.today
+      end
+
+      (hash[friend] = spin_classes) if (spin_classes.length > 0) 
     end
     hash
   end
