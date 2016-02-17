@@ -20,7 +20,10 @@ class User < ActiveRecord::Base
   end
 
   def spin_classes_by_date
-    spin_classes = self.spin_classes
+    spin_classes = self.spin_classes.select do |spinclass|
+      Date.parse(spinclass.month_and_day) >= Date.today
+    end
+
     spin_classes.sort_by do |spin_class|
       Date.parse(spin_class.month_and_day)
     end
