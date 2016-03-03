@@ -43,12 +43,12 @@ class Studio < ActiveRecord::Base
     date = day.to_i
     today = Time.now.day
 
-    if (date >= today) && (today >= 8)
+    if (date >= today) && (today >= 3)
       month = Date.today.strftime("%B")
-    elsif (date >= today) && (today < 8)
+    elsif (date >= today) && (today < 3)
       last_month = Time.now - 1.month 
       month = last_month.strftime("%B") 
-    elsif (date < today) && (today - date > 8)
+    elsif (date < today) && (today - date > 3)
       next_month = Time.now + 1.month 
       month = next_month.strftime("%B")
     else
